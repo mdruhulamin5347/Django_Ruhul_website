@@ -1,0 +1,15 @@
+{% extends 'basic.html'%}
+
+{% block body %}
+<div class="col-md-6 offset-md-3">
+<form method="POST">
+    {% csrf_token %}
+    {% load crispy_forms_tags %}
+    {{form | crispy }}
+    <button type="submit">submit</button>
+    <button type="reset">reset</button>
+</form>
+</div>
+{% endblock body %}
+
+

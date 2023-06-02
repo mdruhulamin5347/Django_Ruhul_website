@@ -1,0 +1,22 @@
+{% extends 'basic.html' %}
+{% block body %}
+<div class="vies" style="height: auto; width: 100%; display: inline; margin: 20px; padding: 20px;">
+    <div class="img" style="display: inline; height: auto; width: 30% ; ">
+        <img style="border-radius: 50%; margin-top: 20px; " src="{{user.userprofile_model.image.url}}" />
+
+    </div>
+    <div class="data" style="float: right; height: auto; width: 70%; margin-top: 20px; ">
+        name =  {{user.username}} <br>
+        birth_date =  {{user.userprofile_model.birth_date}} <br>
+        gender =  {{user.userprofile_model.gender}} <br>
+        blood_group =  {{user.userprofile_model.blood_group}} <br>
+        address =  {{user.userprofile_model.address}} <br>
+        phone =  {{user.userprofile_model.phone}}<br>
+        nationality =  {{user.userprofile_model.nationality}}<br>
+        religion =  {{user.userprofile_model.religion}}<br>
+        biodata =  {{user.userprofile_model.biodata}}<br>
+        profession =  {{user.userprofile_model.profession}} <br>
+        <button class="btn btn-secondary"><a href="/profileapp/tuitionbd/">Tuition Profile Create</a></button>
+    </div>
+</div>
+{% endblock body%}

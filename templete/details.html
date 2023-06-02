@@ -1,0 +1,93 @@
+{% extends 'basic.html' %}
+
+
+
+{% block body %}
+<div class="col-md-6 offset-md-1">
+    {% load humanize %}
+    {% load tag %}
+    <div >
+        <img style="width: 200px; height: auto; border-radius: 50%; " src="{{object.image.url}}" />
+    </div> <br>
+    {% if request.user == object.user %}
+    <a href="/post/edit/{{object.id}}"> Edit</a> <br>
+    <a href="/post/picadd/{{object.id}}">Add Picture</a> <br>
+    <a href="/post/delete/{{object.id}}">Delete</a>
+    {% endif %} <br>
+    Create by : {{object.user.username}} <br>
+    Create Time : {{object.create_at | naturaltime }}
+
+    <br>
+    Title={{object.title_proper}} <br>
+    salary={{object.salary}} <br>
+    details={{object.details}} <br>
+    catagory={{object.catagory}} <br>
+    middle={{object.middle}} <br>
+    Teacher={{object.get_teacher_list}} <br>
+    Student={{object.get_student_list}} <br>
+    {{object.total_view}} peoples seen this post <br>
+    {{object.tatal_like}} people likes this post <br>
+    <div>
+        <form  method="POST" action="/post/likepost/{{object.id}}">
+            {% csrf_token %}
+            {% if liked %}
+                <button style="background-color:yellow;" type="submit">UnLike</button>
+            {% else %}
+            <button style="background-color:aqua;" type="submit" >Like</button>
+
+            {% endif %}
+        </form>
+    </div>
+    <div>
+        <form method="POST" action="/post/comment/">
+            {% csrf_token %}
+            <label for="comment">Your Comment: </label>
+            <input type="text" id="comment" name="comment" placeholder="Enter your comment">
+            <input type="hidden" name="postid" value="{{object.id}}">
+            <input type="hidden" name="parentid" value=""> <br>
+            <button type="submit" >Add Comment</button>
+        </form>
+    </div>
+    <div>
+        {% for comment in comments  %}
+            <div>
+                <div>
+                    <img src="{{comment.user.userprofile_model.image.url}}"  style="width:40px;">
+                </div>
+                <div>
+                    <b>{{comment.user.username}} </b> <span>{{comment.create_at | naturaltime}} </span> <br>
+                    <div>{{comment.text}}</div>
+                    <div>
+                        
+                        <div>
+                            {% for replay in dictofreplay|get_replay:comment.id %}
+            
+                            <div>
+                                <img src="{{replay.user.userprofile_model.image.url}}"  style="width:40px;">
+                            </div>
+                            <div>
+                                <b>{{replay.user.username}} </b> <span>{{replay.create_at | naturaltime}} </span> <br>
+                            <div>{{replay.text}}</div>
+                            </div>
+                            {% endfor %}
+   
+                        </div>
+                        <div>
+                            <form method="POST" action="/post/comment/">
+                                {% csrf_token %}
+                                <label for="comment">Your Replay: </label>
+                                <input type="text" id="comment" name="comment" placeholder="Enter your Replay">
+                                <input type="hidden" name="postid" value="{{object.id}}">
+                                <input type="hidden" name="parentid" value="{{comment.id}}"> <br>
+                                <button type="submit" >Add Replay</button>
+                            </form>
+                        </div>
+                   
+                    </div> 
+
+                </div>  
+            </div>     
+        {% endfor %}                   
+    </div>
+</div>
+{% endblock body %}

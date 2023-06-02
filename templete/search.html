@@ -1,0 +1,13 @@
+{% extends 'basic.html' %}
+
+{% block body %}
+    
+<div class="col-md-6 offset-md-3">
+    {% for i in results %}
+        {{i.title}}  <br> Create by {{i.user.username}} : 
+        <a href="/post/details/{{i.id}}"> Read More....</a> <br><br> <hr>
+    
+    {% endfor %}
+
+</div>
+{% endblock body%}
