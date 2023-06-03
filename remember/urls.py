@@ -21,6 +21,7 @@ from home.views import HOME
 from django.contrib.auth import views as auth_views
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('',HOME.as_view(), name=''),
     path('home/',HOME.as_view(), name='home'),
     path('form/',include('form.urls'), name='form'),
     path('contact/',include('contact.urls'), name='contact'),
