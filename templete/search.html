@@ -1,13 +1,26 @@
 {% extends 'basic.html' %}
+{% block title %} Search List {% endblock %}
 
 {% block body %}
-    
-<div class="col-md-6 offset-md-3">
-    {% for i in results %}
-        {{i.title}}  <br> Create by {{i.user.username}} : 
-        <a href="/post/details/{{i.id}}"> Read More....</a> <br><br> <hr>
-    
-    {% endfor %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-9 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title text-center">Search Files</h5><br><br>
+            
+            {% for i in results %}
+            {{i.title}}  <br> Create by {{i.user.username}} : 
+            <a href="/post/details/{{i.id}}"> Read More....</a> <br><br> <hr>
+        
+        {% endfor %}
+                          
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  </div>
 
-</div>
 {% endblock body%}

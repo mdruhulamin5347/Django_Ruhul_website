@@ -1,13 +1,27 @@
 {% extends 'basic.html'%}
-
+{% block title %} Create Profile  {% endblock %}
 {% block body %}
-<div class="col-md-6 offset-md-3">
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {% load crispy_forms_tags %}
-    {{form | crispy}}
-    <button type="submit" >Create Profile</button>
-   
-</form>
-</div>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-7 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title text-center">Create Profile</h5>
+            
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% load crispy_forms_tags %}
+                {{form | crispy}}
+              <div class="d-grid">
+                  <button type="submit" class="btn btn-primary">Create Profile</button>
+              </div>
+             </form>               
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  </div>
+  <br><br><br><br><br>
 {% endblock body %}

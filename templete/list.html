@@ -1,55 +1,79 @@
 {% extends 'basic.html' %}
-
+{% block title %} Post List  {% endblock %}
 {% block body %}
-<div class="col-md-6 offset-md-3">
-<h2>filter post</h2>
-<div class="filter">
-    <form action="/post/filter/" method="POST">
-        {% csrf_token %}
-        <div class="input-group mb-3">
-            <select class="form-select" id="inputGroupSelect02" name="student">
-                <option>choise...................</option>
-                {% for i in students %}
-                <option value="{{i}}">{{i}}</option>
-                {% endfor %}
-            </select>
-            <label class="input-group-text" for="inputGroupSelect02">Student</label>
-        </div>
-        <div class="input-group mb-4">
-            <select class="form-select" id="inputGroupSelect04" name="teacher">
-                <option>choise...................</option>
-                {% for i in teachers %}
-                <option value="{{i}}">{{i}}</option>
-                {% endfor %}
-            </select>
-            <label class="input-group-text-4" for="inputGroupSelect04">Teacher</label>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 col-md-6">
+            <div class="card">
+              <div class="card-body">
+               
+
+                <h2>filter post</h2>
+                <div class="filter">
+                    <form action="/post/filter/" method="POST">
+                    {% csrf_token %}
+                        <div class="input-group mb-3">
+                            <select class="form-select" id="inputGroupSelect02" name="student">
+                                <option>choise...................</option>
+                                {% for i in students %}
+                                    <option value="{{i}}">{{i}}</option>
+                                {% endfor %}
+                            </select>
+                            <label class="input-group-text" for="inputGroupSelect02">Class_in</label>
+                        </div>
+                        <div class="input-group mb-3">
+                            <select class="form-select" id="inputGroupSelect04" name="teacher">
+                                <option>choise...................</option>
+                                {% for i in teachers %}
+                                    <option value="{{i}}">{{i}}</option>
+                                {% endfor %}
+                            </select>
+                            <label class="input-group-text" for="inputGroupSelect04">Subject</label>
             
-        </div> <br>
-        <div class="input-group mb-3">
-            <div class="input-group-text">
-                <input class="form-check-input mt-0" type="checkbox" value="" id="checkbox" aria-label="Checkbox for following text input" name="available">
-                <label for="checkbox">Only available</label>
+                        </div> <br>
+                        <div class="input-group mb-3">
+                            <div class="input-group-text">
+                                <input class="form-check-input mt-0" type="checkbox" value="" id="checkbox" aria-label="Checkbox for following text input" name="available">
+                                <label for="checkbox">Only available</label>
+                            </div>
+                            </div>
+                        <div class="salary_from">
+                            <label for="salary_from" >Salary From:</label> <br>
+                            <input type="number" class="form-control" aria-label="Text input with checkbox" name="salary_from" id="salary_from"> 
+                        </div>
+                        <div class="salary_to">
+                            <label for="salary_to" >Salary To:</label> <br>
+                            <input type="number" class="form-control" aria-label="Text input with checkbox" name="salary_to" id="salary_to">
+                        </div> <br>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">filter posts</button>
+                        </div>
+                        
+                    </form><br>       
+                </div>
+    
+                    {% for i in posts %}
+                        <a href="/profileapp/otherprofile/{{i.user.username}}/">{{i.user.username}}</a> <br>
+                        Title = {{i.title}} <br>
+                        Details = {{i.details_short}} : 
+                        <a href="/post/details/{{i.id}}"> Read More....</a> <br><br> <hr>
+
+                    {% endfor %}
+              
+                  
+                
+              </div>
             </div>
-            <div class="salary_from">
-                <label for="salary_from" >Salary From:</label> <br>
-                <input type="number" class="form-control" aria-label="Text input with checkbox" name="salary_from" id="salary_from"> 
-            </div>
-            <div class="salary_to">
-                <label for="salary_to" >Salary To:</label> <br>
-                <input type="number" class="form-control" aria-label="Text input with checkbox" name="salary_to" id="salary_to">
-            </div> <br>
-            <button type="submit">filter posts</button>
+          </div>
         </div>
-    </form><br>
+      </div>
+      
+      </div>
+      <br><br><br><br><br>
     
  
-    {% for i in posts %}
-        <a href="/profileapp/otherprofile/{{i.user.username}}/">{{i.user.username}}</a> <br>
-        Title = {{i.title}} <br>
-        Details = {{i.details_short}} : 
-        <a href="/post/details/{{i.id}}"> Read More....</a> <br><br> <hr>
-    
-    {% endfor %}
 
-</div>
+
+
 {% endblock body%}
