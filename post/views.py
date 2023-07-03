@@ -19,6 +19,40 @@ class POST(CreateView):
         form.save()
         form.instance.User=self.request.user
         return super().form_valid(form)
+
+from profileapp.models import teacher_model
+def receiverchoose(j,object):
+    count= 0
+    if j.district==object.district:
+        count= count + 1
+    for i in j.medium:
+        for k in object.middle:
+            if i == k:
+                count = count + 1
+                break
+    for i in j.subject_in.all():
+        for j in object.teacher.all():
+            if i==j:
+                count = count + 1
+                break
+    for i in j.class_in.all():
+        for k in object.student.all():
+            if i==k:
+                count = count + 1
+                break
+    if count >= 1:
+        return True
+
+     
+                us=teacher_model.objects.all()
+                for i in us:
+                    if receiverchoose(i,object):
+                        receiver=i.user
+                        if receiver != request.user:
+                            notify.send(request.user, recipient=receiver, verb="has searching a teacher like you" + f''<a href="/post/details/{object.id}"> Go </a>'')
+
+
+    
 '''
 
 def POST(request):
@@ -45,6 +79,9 @@ def POST(request):
     else:
         form=post_form(district_set=District.objects.all().order_by('name'))  
     return render(request,'post.html',{'form':form})
+
+
+
 
     
 
