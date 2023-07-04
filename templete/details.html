@@ -68,6 +68,31 @@
                         <div>
                             <b>{{comment.user.username}} </b> <span>{{comment.create_at | naturaltime}} </span> <br>
                             <div>{{comment.text}}</div>
+                            <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Delete Comment
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Comment</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <p>Are you sure delete to the comment?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary"><a style="color:wheat; text-decoration:none;" href="/post/deletecomment/{{comment.id}}">Delete</a></button>
+        </div>
+      </div>
+    </div>
+  </div>                            
+                                
+                            
                             <div>
                                 
                                 <div>
@@ -79,6 +104,28 @@
                                     <div>
                                         <b>{{replay.user.username}} </b> <span>{{replay.create_at | naturaltime}} </span> <br>
                                     <div>{{replay.text}}</div>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal{{replay.id}}">
+                                        Delete Reply
+                                      </button>
+                                      
+                                      <!-- Modal -->
+                                      <div class="modal fade" id="exampleModal{{replay.id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                          <div class="modal-content">
+                                            <div class="modal-header">
+                                              <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Reply</h1>
+                                              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                              <p>Are you sure delete to the reply?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                              <button type="button" class="btn btn-primary"><a style="color:wheat; text-decoration:none;" href="/post/deletecomment/{{replay.id}}">Delete</a></button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div> 
                                     </div>
                                     {% endfor %}
            

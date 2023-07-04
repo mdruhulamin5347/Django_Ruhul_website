@@ -198,6 +198,15 @@ def COMMENT(request):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+def DELETECOMMENT(request,id):
+    comment=Comment.objects.get(id=id)
+    comment.delete()
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
+
+
 
 def PICADD(request,id):
     post=post_model.objects.get(id=id)
