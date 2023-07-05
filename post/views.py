@@ -228,3 +228,8 @@ def PICADD(request,id):
     }
     return render(request,'picadd.html',contain)
             
+def APPLY(request, id):
+    post=post_model.objects.get(id=id)
+    notify.send(request.user , recipient=post.user, verb="has apply tuition for you" + f'''<a href="/profileapp/otherprofile/{request.user.username}"> Go </a>''')
+    messages.success(request, "your request succesfully sumited")
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
