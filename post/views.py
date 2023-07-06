@@ -145,10 +145,18 @@ class EDIT(UpdateView):
         id=self.object.id
         return reverse_lazy('details', kwargs={'pk':id})
     
-class DELETE(DeleteView):
-    model=post_model
-    template_name='delete.html'
-    success_url='/post/list/'
+#class DELETE(DeleteView):
+#   model=post_model
+#   template_name='details.html'
+#    success_url='/post/list/'
+
+def DELETE(request,id):
+    post=post_model.objects.get(id=id)
+    post.delete()
+    return HttpResponseRedirect('/post/list/')
+   
+
+
 
 
 def SEARCH(request):

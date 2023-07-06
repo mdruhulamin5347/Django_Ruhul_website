@@ -20,9 +20,33 @@
                 <img style="width: 200px; height: auto; border-radius: 50%; " src="{{object.image.url}}" />
             </div> <br>
             {% if request.user == object.user %}
-            <a href="/post/edit/{{object.id}}"> Edit</a> <br>
-            <a href="/post/picadd/{{object.id}}">Add Picture</a> <br>
-            <a href="/post/delete/{{object.id}}">Delete</a>
+            <button class="btn btn-primary my-1"><a style="color:white; text-decoration:none;" href="/post/edit/{{object.id}}"> Edit</a> <br></button> <br>
+            <button class="btn btn-primary my-1"><a style="color:white; text-decoration:none;" href="/post/picadd/{{object.id}}">Add Picture</a><br></button><br>
+           
+            <button type="button" class="btn btn-primary my-1" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Delete Post
+            </button>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Delete Post</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <p>Are you sure delete to the post?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary"><a style="color:wheat; text-decoration:none;" href="/post/delete/{{object.id}}">Delete</a></button>
+                  </div>
+                </div>
+              </div>
+            </div>    
+
+ 
             {% endif %} <br>
             Create by : {{object.user.username}} <br>
             Create Time : {{object.create_at | naturaltime }}
@@ -42,14 +66,14 @@
                 <form  method="POST" action="/post/likepost/{{object.id}}">
                     {% csrf_token %}
                     {% if liked %}
-                        <button style="background-color:yellow;" type="submit">UnLike</button>
+                        <button class="btn btn-primary my-1" type="submit">UnLike</button>
                     {% else %}
-                    <button style="background-color:aqua;" type="submit" >Like</button>
+                    <button class="btn btn-white border border-primary my-1" type="submit" ><span class="text-primary">Like</span></button>
                   
                     {% endif %}
                 </form>
             </div>
-            <button class="btn btn-primary"><a style="color: wheat; text-decoration:none;" href="/post/apply/{{object.id}}">Apply for tuition</a></button>
+            <button class="btn btn-primary my-2"><a style="color: white; text-decoration:none;" href="/post/apply/{{object.id}}">Apply for tuition</a></button>
             <div>
                 <form method="POST" action="/post/comment/">
                     {% csrf_token %}
@@ -57,7 +81,7 @@
                     <input type="text" id="comment" name="comment" placeholder="Enter your comment">
                     <input type="hidden" name="postid" value="{{object.id}}">
                     <input type="hidden" name="parentid" value=""> <br>
-                    <button type="submit" >Add Comment</button>
+                    <button class="btn btn-primary my-1"  type="submit" >Add Comment</button>
                 </form>
             </div>
             <div>
@@ -138,7 +162,7 @@
                                         <input type="text" id="comment" name="comment" placeholder="Enter your Replay">
                                         <input type="hidden" name="postid" value="{{object.id}}">
                                         <input type="hidden" name="parentid" value="{{comment.id}}"> <br>
-                                        <button type="submit" >Add Replay</button>
+                                        <button class="btn btn-primary" type="submit" >Add Replay</button>
                                     </form>
                                 </div>
                            
